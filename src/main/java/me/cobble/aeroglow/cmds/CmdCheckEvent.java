@@ -11,7 +11,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class CmdCheckEvent implements Listener {
 
-    private AeroGlow plugin;
+    private final AeroGlow plugin;
 
     public CmdCheckEvent(AeroGlow plugin){
         this.plugin = plugin;
@@ -22,8 +22,12 @@ public class CmdCheckEvent implements Listener {
     public void onCmdRun(PlayerCommandPreprocessEvent e){
         Player p = e.getPlayer();
 
-        if (!(p.getPersistentDataContainer().has(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER))) {
-            p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 1);
+        if(e.getMessage().equalsIgnoreCase("/aglow") || e.getMessage().equalsIgnoreCase("/glow:aglow")) {
+            if(p.hasPermission("glow.use")) {
+                if (!(p.getPersistentDataContainer().has(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER))) {
+                    p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 1);
+                }
+            }
         }
     }
 }

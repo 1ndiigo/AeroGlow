@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -23,25 +24,28 @@ public class GlowCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
 
             if (p.hasPermission("glow.use")) {
 
                 flipFlop = !flipFlop;
+                int isGlowingInt = flipFlop ? 1 : 0;
 
-                p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, (flipFlop) ? 1 : 0);
+                p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, isGlowingInt);
 
                 if (Objects.requireNonNull(p.getPersistentDataContainer().get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER)) == 1) {
                     p.sendMessage(Utils.chat(Config.get().getString("enable-msg")));
                     p.setGlowing(true);
+                    p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 1);
                     return false;
                 }
 
                 if (Objects.requireNonNull(p.getPersistentDataContainer().get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER)) == 0) {
                     p.sendMessage(Utils.chat(Config.get().getString("disable-msg")));
                     p.setGlowing(false);
+                    p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 0);
                     return false;
                 }
             } else {
