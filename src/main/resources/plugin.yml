@@ -8,12 +8,8 @@ softdepend:
   - PlaceholderAPI
 description: A simple glow plugin
 commands:
-  glow:
+  aglow:
     description: Toggles Glow
-    permission-message: ""
-    permission: glow.use
-  testcmd:
-    description: test
 permissions:
   glow.use:
     description: needed to use glow

@@ -19,7 +19,7 @@ public class GlowCommand implements CommandExecutor {
 
     public GlowCommand(AeroGlow plugin) {
         this.plugin = plugin;
-        Objects.requireNonNull(plugin.getCommand("glow")).setExecutor(this);
+        Objects.requireNonNull(plugin.getCommand("aglow")).setExecutor(this);
     }
 
     @Override
@@ -30,11 +30,6 @@ public class GlowCommand implements CommandExecutor {
             if (p.hasPermission("glow.use")) {
 
                 flipFlop = !flipFlop;
-
-                if (!(p.getPersistentDataContainer().has(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER))) {
-                    p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 1);
-                    return false;
-                }
 
                 p.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, (flipFlop) ? 1 : 0);
 
@@ -49,6 +44,8 @@ public class GlowCommand implements CommandExecutor {
                     p.setGlowing(false);
                     return false;
                 }
+            } else {
+                p.sendMessage(Utils.chat("&cSorry you don't have permission to use that command"));
             }
         }
         return false;

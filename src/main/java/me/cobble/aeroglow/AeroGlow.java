@@ -1,5 +1,6 @@
 package me.cobble.aeroglow;
 
+import me.cobble.aeroglow.cmds.CmdCheckEvent;
 import me.cobble.aeroglow.cmds.GlowCommand;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -44,6 +45,7 @@ public final class AeroGlow extends JavaPlugin {
 
         this.loadConfig();
         new GlowCommand(plugin);
+        new CmdCheckEvent(plugin);
     }
 
     // loads config.yml
