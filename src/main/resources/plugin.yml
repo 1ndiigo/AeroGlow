@@ -4,13 +4,12 @@ main: me.cobble.aeroglow.AeroGlow
 api-version: 1.16
 prefix: Glow
 authors: [ Cbblestone ]
-softdepend:
-  - PlaceholderAPI
 description: A simple glow plugin
 commands:
-  aglow:
+  glow:
     description: Toggles Glow
 permissions:
   glow.use:
     description: needed to use glow
+    default: op
 

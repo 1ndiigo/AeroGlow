@@ -1,6 +1,6 @@
 package me.cobble.aeroglow;
 
-import me.cobble.aeroglow.cmds.CmdCheckEvent;
+import me.cobble.aeroglow.cmds.Listeners;
 import me.cobble.aeroglow.cmds.GlowCommand;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public final class AeroGlow extends JavaPlugin {
         if (user.getPersistentDataContainer().has(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER)) {
 
             // if the boolean equals 1, return true
-            return Objects.requireNonNull(user.getPersistentDataContainer().get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER)) == 1;
+            return Objects.equals(user.getPersistentDataContainer().get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER), 1);
         }
         user.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 0);
         return false;
@@ -36,7 +36,7 @@ public final class AeroGlow extends JavaPlugin {
 
         this.loadConfig();
         new GlowCommand(plugin);
-        new CmdCheckEvent(plugin);
+        new Listeners(plugin);
     }
 
     // loads config.yml

@@ -17,41 +17,37 @@ import java.util.Objects;
 public class GlowCommand implements CommandExecutor {
 
     private final AeroGlow plugin;
-    private boolean flipFlop = false;
 
     public GlowCommand(AeroGlow plugin) {
         this.plugin = plugin;
-        Objects.requireNonNull(plugin.getCommand("aglow")).setExecutor(this);
+        plugin.getCommand("glow").setExecutor(this);
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
+            boolean flipFlop = false;
 
             if (p.hasPermission("glow.use")) {
 
-                flipFlop = !flipFlop;
+                flipFlop = !AeroGlow.isGlowing(p);
                 int isGlowingInt = flipFlop ? 1 : 0;
                 PersistentDataContainer pdc = p.getPersistentDataContainer();
 
                 pdc.set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, isGlowingInt);
 
-                if (Objects.requireNonNull(pdc.get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER)) == 1) {
+                if (Objects.equals(pdc.get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER), 1)) {
                     p.sendMessage(Utils.chat(Config.get().getString("enable-msg")));
                     p.setGlowing(true);
-
-                    // double check stuff
-                    pdc.set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 1);
                     return false;
                 }
 
-                if (Objects.requireNonNull(pdc.get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER)) == 0) {
+                // BukkitRunnable
+
+                if (Objects.equals(pdc.get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER), 1)) {
                     p.sendMessage(Utils.chat(Config.get().getString("disable-msg")));
                     p.setGlowing(false);
-
-                    // just in case
-                    pdc.set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 0);
                     return false;
                 }
             } else {
