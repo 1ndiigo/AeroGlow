@@ -22,6 +22,7 @@ public class Config {
         if (!file.exists()) {
             log.info("No config found, Generating...");
             try {
+                //noinspection ResultOfMethodCallIgnored
                 file.createNewFile();
             } catch (final IOException e) {
                 // that's a lot of damage
