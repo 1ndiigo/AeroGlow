@@ -51,7 +51,6 @@ public final class AeroGlow extends JavaPlugin {
         }
         PluginCommand cmd =  this.getCommand("glow");
                 if (cmd!=null) cmd.setExecutor(new GlowCommand());
-                else
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
     }
 
