@@ -3,7 +3,7 @@ version: ${project.version}
 main: me.cobble.aeroglow.AeroGlow
 api-version: 1.16
 prefix: Glow
-authors: [ Cbblestone ]
+authors: [ Cbblestone, ProfessorZel ]
 description: A simple glow plugin
 commands:
   glow:
