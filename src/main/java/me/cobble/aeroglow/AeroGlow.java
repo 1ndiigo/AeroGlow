@@ -25,6 +25,7 @@ public final class AeroGlow extends JavaPlugin {
             return Objects.equals(user.getPersistentDataContainer().get(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER), 1);
         }
         user.getPersistentDataContainer().set(new NamespacedKey(plugin, "glowing"), PersistentDataType.INTEGER, 0);
+        user.setGlowing(false);
         return false;
     }
 
@@ -34,16 +35,12 @@ public final class AeroGlow extends JavaPlugin {
 
         AeroGlow.plugin = AeroGlow.getPlugin();
 
-        this.loadConfig();
-        new GlowCommand(plugin);
-        new Listeners(plugin);
-    }
-
-    // loads config.yml
-    private void loadConfig() {
         this.saveDefaultConfig();
         Config.setup();
         Config.get().options().copyDefaults(true);
         Config.save();
+
+        new GlowCommand(plugin);
+        new Listeners(plugin);
     }
 }
