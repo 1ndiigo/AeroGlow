@@ -1,7 +1,7 @@
 package me.cobble.aeroglow;
 
-import me.cobble.aeroglow.cmds.Listeners;
 import me.cobble.aeroglow.cmds.GlowCommand;
+import me.cobble.aeroglow.cmds.Listeners;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;

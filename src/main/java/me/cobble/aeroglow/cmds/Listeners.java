@@ -13,31 +13,31 @@ public class Listeners implements Listener {
 
     private final AeroGlow plugin;
 
-    public Listeners(AeroGlow plugin){
+    public Listeners(AeroGlow plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    public void onChangeWorld(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if(AeroGlow.isGlowing(p)){
+        if (AeroGlow.isGlowing(p)) {
             p.setGlowing(true);
         }
     }
 
     @EventHandler
-    public void onChangeWorld(PlayerChangedWorldEvent e){
+    public void onChangeWorld(PlayerChangedWorldEvent e) {
         Player p = e.getPlayer();
-        if(AeroGlow.isGlowing(p)){
+        if (AeroGlow.isGlowing(p)) {
             p.setGlowing(true);
         }
     }
 
     @EventHandler
-    public void onChangeWorld(PlayerRespawnEvent e){
+    public void onRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        if(AeroGlow.isGlowing(p)){
+        if (AeroGlow.isGlowing(p)) {
             p.setGlowing(true);
         }
     }

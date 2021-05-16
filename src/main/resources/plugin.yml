@@ -12,4 +12,8 @@ permissions:
   glow.use:
     description: needed to use glow
     default: op
+  glow.admin:
+    description: Admin perm
+    default: op
+    children: { glow.use: true }
 
