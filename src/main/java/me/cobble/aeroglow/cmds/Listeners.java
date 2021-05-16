@@ -11,17 +11,11 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class Listeners implements Listener {
 
-    private final AeroGlow plugin;
-
-    public Listeners(AeroGlow plugin) {
-        this.plugin = plugin;
-        Bukkit.getPluginManager().registerEvents(this, plugin);
-    }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if (AeroGlow.isGlowing(p)) {
+        if (AeroGlow.isGlowing(p.getUniqueId())) {
             p.setGlowing(true);
         }
     }
@@ -29,7 +23,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onChangeWorld(PlayerChangedWorldEvent e) {
         Player p = e.getPlayer();
-        if (AeroGlow.isGlowing(p)) {
+        if (AeroGlow.isGlowing(p.getUniqueId())) {
             p.setGlowing(true);
         }
     }
@@ -37,7 +31,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        if (AeroGlow.isGlowing(p)) {
+        if (AeroGlow.isGlowing(p.getUniqueId())) {
             p.setGlowing(true);
         }
     }
